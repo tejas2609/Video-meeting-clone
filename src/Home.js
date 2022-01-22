@@ -1,7 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Input, Button, IconButton } from '@material-ui/core';
-import GitHubIcon from '@material-ui/icons/GitHub';
 import "./Home.css"
+import home from './images/logo.png';
+import { styled } from '@mui/material/styles';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import Img1 from './images/slideimg1.svg';
+import Img2 from './images/slideimg2.svg';
+import Img3 from './images/slideimg3.svg';
+import Img4 from './images/slideimg4.svg';
+
+
+const RightLightTooltip = styled(({ className, ...props }) => (
+	<Tooltip {...props} classes={{ popper: className }} />
+  ))(({ theme }) => ({
+	[`& .${tooltipClasses.tooltip}`]: {
+	  backgroundColor: theme.palette.common.white,
+	  color: 'rgba(0, 0, 0, 0.87)',
+	  boxShadow: theme.shadows[1],
+	  fontSize: 11,
+	},
+  }));
+
 
 class Home extends Component {
   	constructor (props) {
@@ -23,29 +42,56 @@ class Home extends Component {
 		}
 	}
 
+	
 	render() {
 		return (
 			<div className="container2">
-				<div style={{fontSize: "14px", background: "white", width: "10%", textAlign: "center", margin: "auto", marginBottom: "10px"}}>
-					Source code: 
-					<IconButton style={{color: "black"}} onClick={() => window.location.href="https://github.com/0x5eba/Video-Meeting"}>
-						<GitHubIcon />
-					</IconButton>
+				<nav>
+					<div className="left-item">
+						<img src={home} alt='home'/>
+					</div>
+      			</nav>
+				<div className='sidenav'>
+					<div className='sidenav-items'>
+						<RightLightTooltip title="About Us"> 
+							<div className='faicon'><i className="far fa-question-circle"></i></div>
+						</RightLightTooltip>
+						<RightLightTooltip title="Comment Us">
+							<div className='faicon'><i className="far fa-comment-alt"></i></div>
+						</RightLightTooltip>
+						<RightLightTooltip title="Settings">
+							<div className='faicon'><i className="fa fa-cog"></i></div>
+						</RightLightTooltip>
+						<RightLightTooltip title="More Options">
+							<div className='faicon'><i className="fa fa-ellipsis-v"></i></div>
+						</RightLightTooltip>
+						
+						
+					</div>
 				</div>
-				
-				<div>
-					<h1 style={{ fontSize: "45px" }}>Video Meeting</h1>
-					<p style={{ fontWeight: "200" }}>Video conference website that lets you stay in touch with all your friends.</p>
+				<div style={{marginTop: '30px'}}>
+					<p className='head' >Premium video meetings.</p>
+					<p className='head'>Now free for everyone.</p>
+					<p className='subhead'>We re-engineered the service we built for secure business meetings, Google Meet, to make it free and available for all.</p>
 				</div>
 
-				<div style={{
-					background: "white", width: "30%", height: "auto", padding: "20px", minWidth: "400px",
-					textAlign: "center", margin: "auto", marginTop: "100px"
+				<div className='meet_creds' style={{
+					background: "white", width: "30%", height: "auto", minWidth: "400px",
+					textAlign: "center", margin: "auto", marginTop: "30px"
 				}}>
-					<p style={{ margin: 0, fontWeight: "bold", paddingRight: "50px" }}>Start or join a meeting</p>
-					<Input placeholder="URL" onChange={e => this.handleChange(e)} />
-					<Button variant="contained" color="primary" onClick={this.join} style={{ margin: "20px" }}>Go</Button>
+					<p className='join_intro'>Start or join a meeting</p>
+					<div className='meeting_url'>
+						<Input className="input_url" placeholder="URL" onChange={e => this.handleChange(e)} />
+						<button className="n_meet" onClick={this.join}>
+							<i className="fa fa-video-camera" /><span>Create meeting</span>
+						</button>
+					</div>
+					<p className='more-info	'><span>Learn More</span> about our meetings</p>
 				</div>
+				<div className='providings'>
+					<p>This is a demo meeting application providing a minimal user interface</p>
+				</div>
+				
 			</div>
 		)
 	}

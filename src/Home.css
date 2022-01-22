@@ -1,3 +1,12 @@
+
+@font-face {
+	font-family: pop_reg;
+	src: url('../src/font/Poppins-Regular.ttf');
+}
+@font-face {
+	font-family: pop_light;
+	src: url('../src/font/Poppins-Light.ttf');
+}
 html, body {
   	height: 100%;
 }
@@ -9,8 +18,119 @@ body {
 
 .container2 {
 	padding-top: 30px;
-	margin: auto;
-	align-items: center;
 	justify-content: center;
 	text-align: center;
+}
+
+nav .left-item img{
+    width: 10%;
+}
+nav .right-item{
+    display: flex;
+    padding: 1% 0;
+}
+.sidenav{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 10%;
+	height: 100%;
+	background-color: rgb(255, 107, 107);
+}
+.sidenav-items{
+	padding-top: 25%;
+}
+.sidenav-items .faicon{
+	padding-top: 35%;
+}
+.faicon i{
+	font-size: 20px;
+	color: rgba(255, 255, 255, 0.952);
+}
+.head{
+    font-size: 35px;
+    line-height: 35px;
+    font-family: corbert;
+}
+.subhead{
+    font-size: 14px;
+    font-family: pop_reg;
+    color: grey;
+    line-height: 15px;
+    margin-top: 2%;
+}
+.n_meet{
+	margin-top: 10%;
+	margin-left: 2%;
+    font-family: pop_light;
+    padding: 0.7% 3%;
+    border-radius: 5px;
+    border: 0.5px solid rgb(255, 66, 66);
+    background-color: rgb(255, 66, 66);
+    white-space: nowrap;
+	color: black;
+}
+.n_meet i{
+    margin-right: 10%;
+	color: black;
+}
+.meet_creds{
+	padding: 5%;
+}
+.join_intro{
+	font-family: pop_reg;
+	font-weight: bold;
+	letter-spacing: 2px;
+	font-size: 16px;
+}
+.meeting_url{
+	align-items: center;
+}
+.input_url{
+	width: 70%;
+	margin-top: 2%;
+	font-size: 18px;
+}
+.meeting_url > button{
+	width: 100%;
+}
+.meeting_url > button:hover{
+	cursor: pointer;
+}
+.more-info{
+	font-family: pop_reg;
+	font-size: 12px;
+	margin-top: 2%;
+}
+.more-info span{
+	color: rgb(255, 66, 66);
+}
+.more-info span:hover{
+	text-decoration: underline;
+	text-underline-offset: 2px;
+	transition: 0.3s all ease;
+	cursor: pointer;
+}
+.far:hover, .fa:hover{
+	cursor: pointer;
+	transform: scale(1.2);
+	transition: 0.5s all ease;
+}
+.providings{
+	margin-top: 4%;
+	font-size: 14px;
+	font-family: corbert;
+}
+.about{
+	width: 100%;
+	position: fixed;
+	left: 80%;
+	top: 0;
+}
+.about ul li{
+	display: flex;
+	align-items: center;
+}
+.about ul li img{
+	width: 20%;
 }

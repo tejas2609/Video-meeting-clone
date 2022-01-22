@@ -18,7 +18,7 @@ if(process.env.NODE_ENV==='production'){
 		res.sendFile(path.join(__dirname+"/build/index.html"))
 	})
 }
-app.set('port', (process.env.PORT || 4001))
+app.set('port', (process.env.PORT || 4000))
 
 sanitizeString = (str) => {
 	return xss(str)
@@ -35,7 +35,6 @@ io.on('connection', (socket) => {
 			connections[path] = []
 		}
 		connections[path].push(socket.id)
-
 		timeOnline[socket.id] = new Date()
 
 		for(let a = 0; a < connections[path].length; ++a){

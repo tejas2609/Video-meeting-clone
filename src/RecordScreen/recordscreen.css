@@ -1,0 +1,19 @@
+button{
+    margin-top: 2%;
+    margin-left: 2%;
+    font-family: corbert;
+    padding: 0.7% 3%;
+    border-radius: 5px;
+    border: 0.5px solid rgb(255, 66, 66);
+    background-color: rgb(255, 66, 66);
+    white-space: nowrap;
+	color: black;
+    font-size: 12px;
+}
+.Buttons{
+    display: block;
+    margin-top: -4%;
+}
+.video{
+    margin-top: 5%;
+}

@@ -11,6 +11,9 @@ import ScreenShareIcon from '@material-ui/icons/ScreenShare'
 import StopScreenShareIcon from '@material-ui/icons/StopScreenShare'
 import CallEndIcon from '@material-ui/icons/CallEnd'
 import ChatIcon from '@material-ui/icons/Chat'
+import { styled } from '@mui/material/styles';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import { ReactMediaRecorder } from "react-media-recorder";
 
 import { message } from 'antd'
 import 'antd/dist/antd.css'
@@ -19,8 +22,23 @@ import { Row } from 'reactstrap'
 import Modal from 'react-bootstrap/Modal'
 import 'bootstrap/dist/css/bootstrap.css'
 import "./Video.css"
+import home from './images/logo.png';
+import RecordScreen from './RecordScreen/recordscreen';
 
-const server_url = process.env.NODE_ENV === 'production' ? 'https://video.sebastienbiollo.com' : "http://localhost:4001"
+
+const RightLightTooltip = styled(({ className, ...props }) => (
+	<Tooltip {...props} classes={{ popper: className }} />
+  ))(({ theme }) => ({
+	[`& .${tooltipClasses.tooltip}`]: {
+	  backgroundColor: theme.palette.common.white,
+	  color: 'rgba(0, 0, 0, 0.87)',
+	  boxShadow: theme.shadows[1],
+	  fontSize: 11,
+	},
+  }));
+  
+// Setting the environment to production generally ensures that. logging is kept to a minimum, essential level. more caching levels take place to optimize performance.
+  const server_url = process.env.NODE_ENV === 'production' ? 'https://video.tejas_sdp.com' : "http://localhost:4001"
 
 var connections = {}
 const peerConnectionConfig = {
@@ -58,7 +76,7 @@ class Video extends Component {
 
 		this.getPermissions()
 	}
-
+	
 	getPermissions = async () => {
 		try{
 			await navigator.mediaDevices.getUserMedia({ video: true })
@@ -114,6 +132,7 @@ class Video extends Component {
 	getUserMediaSuccess = (stream) => {
 		try {
 			window.localStream.getTracks().forEach(track => track.stop())
+
 		} catch(e) { console.log(e) }
 
 		window.localStream = stream
@@ -410,7 +429,7 @@ class Video extends Component {
 	copyUrl = () => {
 		let text = window.location.href
 		if (!navigator.clipboard) {
-			let textArea = document.createElement("textarea")
+			let textArea = document.createEleme1nt("textarea")
 			textArea.value = text
 			document.body.appendChild(textArea)
 			textArea.focus()
@@ -453,18 +472,44 @@ class Video extends Component {
 		}
 		return (
 			<div>
+				<nav>
+					<div className="left-item">
+						<img src={home} alt='home'/>
+					</div>
+      			</nav>
+				<div className='sidenav'>
+					<div className='sidenav-items'>
+						<RightLightTooltip title="About Us">
+							<div className='faicon'><i className="far fa-question-circle"></i></div>
+						</RightLightTooltip>
+						<RightLightTooltip title="Comment Us">
+							<div className='faicon'><i className="far fa-comment-alt"></i></div>
+						</RightLightTooltip>
+						<RightLightTooltip title="Settings">
+							<div className='faicon'><i className="fa fa-cog"></i></div>
+						</RightLightTooltip>
+						<RightLightTooltip title="More Options">
+							<div className='faicon'><i className="fa fa-ellipsis-v"></i></div>
+						</RightLightTooltip>
+						<div className='url-copy' style={{ paddingTop: "0px" }}>
+							<Input style={{fontSize: '12px', wordWrap: 'wrap'}} value={window.location.href} disable="true"></Input>
+							<button className="connect" onClick={this.copyUrl}>Copy invite link</button>
+						</div>
+						
+					</div>
+				</div>
 				{this.state.askForUsername === true ?
 					<div>
 						<div style={{background: "white", width: "30%", height: "auto", padding: "20px", minWidth: "400px",
 								textAlign: "center", margin: "auto", marginTop: "50px", justifyContent: "center"}}>
 							<p style={{ margin: 0, fontWeight: "bold", paddingRight: "50px" }}>Set your username</p>
 							<Input placeholder="Username" value={this.state.username} onChange={e => this.handleUsername(e)} />
-							<Button variant="contained" color="primary" onClick={this.connect} style={{ margin: "20px" }}>Connect</Button>
+							<button className='connect' onClick={this.connect}>Connect</button>
 						</div>
 
 						<div style={{ justifyContent: "center", textAlign: "center", paddingTop: "40px" }}>
 							<video id="my-video" ref={this.localVideoref} autoPlay muted style={{
-								borderStyle: "solid",borderColor: "#bdbdbd",objectFit: "fill",width: "60%",height: "30%"}}></video>
+								borderStyle: "solid",borderColor: "#bdbdbd",objectFit: "fill",width: "40%",height: "400px"}}></video>
 						</div>
 					</div>
 					:
@@ -511,7 +556,8 @@ class Video extends Component {
 								<Button variant="contained" color="primary" onClick={this.sendMessage}>Send</Button>
 							</Modal.Footer>
 						</Modal>
-
+						
+						
 						<div className="container">
 							<div style={{ paddingTop: "20px" }}>
 								<Input value={window.location.href} disable="true"></Input>
@@ -523,9 +569,13 @@ class Video extends Component {
 							<Row id="main" className="flex-container" style={{ margin: 0, padding: 0 }}>
 								<video id="my-video" ref={this.localVideoref} autoPlay muted style={{
 									borderStyle: "solid",borderColor: "#bdbdbd",margin: "10px",objectFit: "fill",
-									width: "100%",height: "100%"}}></video>
+									width: "70%",height: "100%"}}></video>
 							</Row>
 						</div>
+						<div className='Record'>
+							<RecordScreen></RecordScreen>
+						</div>
+
 					</div>
 				}
 			</div>
@@ -533,4 +583,4 @@ class Video extends Component {
 	}
 }
 
-export default Video
+export default Video;
